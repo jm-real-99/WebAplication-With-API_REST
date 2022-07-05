@@ -1,0 +1,14 @@
+/* IMAGE ============*/
+.summary-user .imageUser{
+    margin-left: 20px;
+    display: flex;
+	flex-direction: column;
+	width: 48%;
+}
+.summary-user .imageUser img {
+	width: 300px;
+	height: 300px;
+	background-color: white;
+	object-fit: contain;
+	border: 2px solid black;
+}

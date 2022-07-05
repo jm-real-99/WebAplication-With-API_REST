@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- ### BOOTSTRAP ### -->
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+			<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+			<meta charset="UTF-8"/>
+			<link rel="stylesheet" type="text/css" href="/css/filter.css" />
+		<!-- ################# -->
+		<title>BiciURJC</title>
+	</head>
+	<body>
+		<!-- ### CABECERA ### -->
+		<div class="container">
+			 <div class="jumbotron">
+			 	<h1>BiciURJC</h1>
+			 </div>
+	  	</div>
+			
+			<ul class="nav nav-tabs">
+			 	 <li><a href="/users">Gestionar Usuarios</a></li>
+				 <li><a href="/estaciones">Gestionar Estaciones</a></li>
+				 <li><a href="/bikes">Gestionar Bicicletas</a></li>
+			</ul>
+		<!-- ############### -->
+		<h1>Estacion</h1>
+				 </div><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Identificador:</strong> {{estacion.id}}</p>
+				 </div><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Numero de Serie:</strong> {{estacion.numSerie}}</p>
+				 </div><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Coordenadas:</strong> {{estacion.coordenadas}}</p>
+				 </div><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Capacidad</strong> {{estacion.capacidad}}</p>
+				 </div><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Fecha</strong> {{estacion.fecha}}</p>
+				 </div><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Estado:</strong> {{estacion.estado}}</p>
+				 <hr>
+				 </div><p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Bicicletas:</strong></p>
+				 	{{#noBicis}}
+				 		<p>No hay bicicletas asignadas a esta estación</p>
+				 	{{/noBicis}}
+					   {{#bikeList}} 
+					    <a href="/bike/{{id}}">
+									<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Número de Serie:</strong> {{numSerie}}&nbsp;&nbsp;&nbsp;&nbsp;<strong>Modelo:</strong> {{modelo}}&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fecha:</strong> {{fecha}}&nbsp;&nbsp;&nbsp;&nbsp;<strong>Estado:</strong> {{estado}} </p>
+						</a>
+					    {{/bikeList}}
+				  </p>
+	</body>
+</html>

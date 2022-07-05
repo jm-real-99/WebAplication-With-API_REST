@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="/css/user.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/filter.css" />
+		<title>BiciURJC</title>
+		
+	</head>
+	<body>
+	
+	<!-- ### CABECERA ### -->
+	<div class="container">
+		 <div class="jumbotron">
+		 	<h1>BiciURJC</h1>
+		 </div>
+  	</div>
+		
+		<ul class="nav nav-tabs">
+		 	 <li class="active"><a href="/users">Gestionar Usuarios</a></li>
+			 <li><a href="/estaciones">Gestionar Estaciones</a></li>
+			 <li><a href="/bikes">Gestionar Bicicletas</a></li>
+		</ul>
+	<!-- ############### -->
+	<div class="float-right">
+		<h1>Lista de usuarios</h1>
+			
+		{{#find}}
+		<table class="table table-striped">
+				 <thead>
+					 <tr>
+						 <th>IDENTIFICADOR</th>
+						 <th>NOMBRE</th>
+						 <th>ESTADO</th>
+					 </tr>
+				 </thead>
+				 <tbody>
+				 	{{#users}}
+				 	<tr>
+							<td><a href="/user/{{id}}"></strong> {{id}} </a></td>
+							<td><a href="/user/{{id}}"></strong> {{nombre}} </a></td>
+							<td><a href="/user/{{id}}"></strong> {{estado}} </a></td>
+					</tr>
+					{{/users}}
+	 			</tbody>
+			</table>
+		{{/find}}
+		{{^find}}
+			<p>No se ha encontrado ningún usuario</p>
+		{{/find}}
+		<hr>
+		<h2>Dar de baja</h2>
+		<form  action = "/user/deleteUser">
+			&nbsp;&nbsp;&nbsp;&nbsp;<select name="usuario">
+	        	<ul>
+				{{#usuariosActivos}}
+				<option value="{{id}}">{{id}},{{nombre}}</option> 
+				{{/usuariosActivos}}
+				</ul>
+			</select>
+			<button type="submit" name=boton class="btn btn-default" value=none>
+		 		<span class="glyphicon glyphicon glyphicon-trash"></span> Dar de baja
+		 		</button>
+		</form>
+		<hr>
+		<h2>Crear usuario</h2>
+			<form action="/user/createUser" method="POST" enctype="multipart/form-data">
+				<p>
+					<div class="form-group">
+						&nbsp;&nbsp;&nbsp;&nbsp;<b>Nombre:</b> <input type="text" name="nombre" placeholder="Nombre" required />
+					</div>
+					<div class="form-group">
+						&nbsp;&nbsp;&nbsp;&nbsp;<b>Contraseña:</b> <input type="password" name="contraseña" placeholder="contraseña" required />
+					</div>
+					<div class="form-group">
+						&nbsp;&nbsp;&nbsp;&nbsp;<b>Imagen:</b><input type='file' name='file' accept=".jpg, .jpeg, .png" required />
+					</div>
+				</p>
+				&nbsp;&nbsp;<button type="submit" class="btn btn-default">
+ 					<span class="glyphicon glyphicon-upload"></span> Añadir usuario
+ 				</button>	
+			</form>
+		{{#addedUserSuccess}}<spam class="success">&nbsp;&nbsp;El usuario se ha añadido correctamente</spam>{{/addedUserSuccess}}
+	
+		
+	</div>
+	</body>
+</html>

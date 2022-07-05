@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+	
+	<head>
+	
+		<!-- ### BOOTSTRAP ### -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/filter.css" />
+		<meta charset="UTF-8"/>
+		<!-- ################# -->
+		<title>BiciURJC</title>
+		
+	</head>
+	
+	<body>
+		<!-- ### CABECERA ### -->
+		<div class="container">
+			 <div class="jumbotron">
+			 	<h1>BiciURJC</h1>
+			 </div>
+	  	</div>
+			
+			<ul class="nav nav-tabs">
+			 	 <li><a href="/users">Gestionar Usuarios</a></li>
+				 <li><a href="/estaciones">Gestionar Estaciones</a></li>
+				 <li><a href="/bikes">Gestionar Bicicletas</a></li>
+			</ul>
+		<!-- ############### -->
+		
+		<h1>Bicicleta</h1>
+		
+		<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Número de Serie:</strong>{{bicicleta.numSerie}}</p>
+		<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Modelo:</strong>{{bicicleta.modelo}}</p>
+		<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Fecha:</strong>{{bicicleta.fecha}}</p>
+		<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Estado:</strong>{{bicicleta.estado}}</p>
+		<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;Historial de estados de la bicicleta:</strong></p>
+		{{#historial}}
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;{{estados}}</p>
+		{{/historial}}
+		{{^historial}}
+			<p>No hay entradas en el historial de la bicicleta</p>
+		{{/historial}}
+		<!--Mostrar listado de estados historicos de la bicicleta-->
+		
+		<hr>
+		{{#sinBase}}
+			<form action="/bike/{{id}}/darDeAltaBici" method="POST">
+				<div class="content-select">
+					<select name ="idEstacion" required> 
+						<option value="">Seleccione una estación</option>
+							{{#estaciones}}
+								<option value="{{id}}">{{numSerie}}</option>
+							{{/estaciones}} 	
+					</select>
+				</div>
+		               &nbsp;&nbsp; <button type="submit" class="btn btn-default">
+		 					<span class="glyphicon glyphicon-upload"></span> Asignar base
+		 				</button>	
+				</form>
+		{{/sinBase}}
+		{{#dadoDeAlta}}<spam class="success">La bicicleta se ha dado de alta a la estación correctamente</spam>{{/dadoDeAlta}}
+		{{#noDadoDeAlta}}<spam class="failure">La bicicleta no se ha podido dar de alta debido a que se han acabado las plazas disponibles para ésta estación.</spam>{{/noDadoDeAlta}}
+		
+		<form action="/bike/{{id}}/darDeBajaBici" method="GET">
+		
+			&nbsp;&nbsp;<button type="submit" class="btn btn-default">
+ 					<span class="glyphicon glyphicon-upload"></span> Dar de baja
+ 				</button>	
+		</form>
+	</body>
+
+</html>
+
+
+<!--Permitir asignar base a una bicicleta que este sin base. Comprobar que la base tenga espacio suficiente-->

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="/css/user.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/filter.css" />
+		<title>BiciURJC</title>
+	</head>
+		<!-- ### CABECERA ### -->
+		<div class="container">
+			 <div class="jumbotron">
+			 	<h1>BiciURJC</h1>
+			 </div>
+	  	</div>
+			
+			<ul class="nav nav-tabs">
+			 	 <li><a href="/users">Gestionar Usuarios</a></li>
+				 <li><a href="/estaciones">Gestionar Estaciones</a></li>
+				 <li><a href="/bikes">Gestionar Bicicletas</a></li>
+			</ul>
+		<!-- ############### -->
+			
+		<h1>Usuario</h1>
+		
+			<div class="summary-user">
+				<div class="imageUser">
+					<img src="data:image/png;base64,{{foto}}" alt="">
+				</div>
+			</div>
+ 				 </div> <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Identificador:</strong> {{ident}}</p>
+				 </div> <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Nombre: </strong> {{nombre}}</p>
+				 </div> <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Estado: </strong> {{estado}}</p>
+				 </div> <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fecha: </strong> {{fecha}}</p>
+		</body>
+		{{#baja}}
+		<form action="/user/deleteUser" method="get">
+				<button type="submit" name=usuario class="btn btn-default" value={{id}}>
+		 		<span class="glyphicon glyphicon glyphicon-trash"></span> Dar de baja
+		 		</button>
+			</form>
+		{{/baja}}
+		<form action="/user/{{id}}/modifyUser" method="get">
+				<button type="submit" name=ident class="btn btn-default" value={{id}}>
+		 		<span class="glyphicon glyphicon glyphicon-pencil"></span> Modificar usuario
+		 		</button>
+		</form> 
+		
+</html>

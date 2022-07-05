@@ -1,0 +1,11 @@
+.failure{
+  color: red;
+  font-weight: bold;
+}
+.success{
+  color: green;
+  font-weight: bold;
+}
+.content-select select:focus{
+	border: 3px solid #555;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<!-- ### BOOTSTRAP ### -->
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+			<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+			<meta charset="UTF-8"/>
+			<link rel="stylesheet" type="text/css" href="/css/filter.css" />
+
+		<!-- ################# -->
+
+		<title>BiciURJC</title>
+	</head>
+
+	<body>
+		
+		<!-- ### CABECERA ### -->
+		<div class="container">
+			 <div class="jumbotron">
+			 	<h1>BiciURJC</h1>
+			 </div>
+	  	</div>
+			
+			<ul class="nav nav-tabs">
+			 	 <li><a href="/users">Gestionar Usuarios</a></li>
+				 <li><a href="/estaciones">Gestionar Estaciones</a></li>
+				 <li class="active"><a href="/bikes">Gestionar Bicicletas</a></li>
+			</ul>
+		<!-- ############### -->	
+		<h1>Lista de Bicicletas</h1>
+		<table class="table table-striped">
+				 <thead>
+					 <tr>
+						 <th>NÚMERO SERIE</th>
+						 <th>MODELO</th>
+						 <th>ESTADO</th>
+					 </tr>
+				 </thead>
+				 <tbody>
+				 	{{#bikes}}
+				 	<tr>
+				 		<td><a href="/bike/{{id}}"> <strong>Numero de Serie:</strong> {{numSerie}} </a> </td>
+				 		<td><a href="/bike/{{id}}"> <strong>Modelo:</strong> {{modelo}} </a> </td>
+				 		<td><a href="/bike/{{id}}"> <strong>Estado:</strong> {{estado}}</a> </td>
+						<td><a href="/bike/{{id}}">
+							<button type="submit" name=modificar value={{numSerie}}>Detalles</button>
+							</a>
+						</td>
+						<td><a href="/bike/{{id}}/darDeBajaBici">
+							<button type="submit" name=eliminar value={{id}}>Dar de baja</button>
+							</a>
+						</td>
+					</tr>
+					{{/bikes}}
+	 			</tbody>
+			</table>
+			{{^find}}
+						<p>&nbsp;&nbsp; <spam class="failure">No se ha encontrado ninguna bicicleta en el sistema</spam></p>
+			{{/find}}
+		
+		<hr>
+		
+		<form action="/bikes/filterBike" method="GET">
+
+			<h2> Buscar:</h2>
+			<table class="table">
+				<thead>
+ 					<tr>
+ 						<th>Numero de serie</th>
+ 						<th>Estado</th>
+ 					</tr>
+				 </thead>
+				 <tbody>
+				 	<td>
+				 		<input type="search" id="numSerie" name="numSerie" placeholder="Numero de serie">
+				 	</td>
+				 	<td>
+				 		<input type="radio" id="choice1"
+								name="estado" value="EnBase">
+						<label for="choice5">En base</label>		
+						<input type="radio" id="choice2"
+								name="estado" value="SinBase">
+						<label for="choice5">Sin base</label>
+						<input type="radio" id="choice3"
+								name="estado" value="Reservada">
+						<label for="choice5">Reservada</label>		
+						<input type="radio" id="choice4"
+								name="estado" value="Baja">
+						<label for="choice5"> De baja</label>
+				 	</td>
+				 	<td>
+				 		<button type="submit" class="btn btn-default" onclick="filter()">
+ 						<span class="glyphicon glyphicon-search"></span> Buscar
+ 						</button>
+				 	</td>
+				 </tbody>
+			</table>
+			
+		</form>
+		
+		{{^findFilter}}
+		
+			<p>&nbsp;&nbsp; <spam class="failure">No se ha encontrado ninguna bicicleta en el sistema con ese filtro</spam></p>
+			<form action="/bikes" method="GET">
+				&nbsp;&nbsp; <button type="submit" class="btn btn-default">
+ 					<span class="glyphicon glyphicon-upload"></span> Obtener todas las bicicletas
+ 				</button>	
+			</form>
+			
+		{{/findFilter}}
+		
+		<hr>
+		<h2>Dar de alta bicicleta</h1>		
+			
+		<form action="/bikes/createBike" method="POST">
+			<p>
+				&nbsp;&nbsp;<b>Numero de Serie</b> 
+				<input type="text" id="numSerie" name="numSerie" placeholder="Numero de serie" length="16">
+			</p>
+			<p>		
+				&nbsp;&nbsp;<b>Modelo</b> 
+				<input type="text" id="modelo" name="modelo" placeholder="Modelo">
+			</p>
+			
+			 &nbsp;&nbsp;<button type="submit" class="btn btn-default">
+ 			<span class="glyphicon glyphicon-circle-arrow-up"></span> Dar de alta
+ 			</button>
+			
+		</form>
+		{{#addedSuccess}}<spam class="success">&nbsp;&nbsp;Se ha añadido la bicicleta correctamente</spam>{{/addedSuccess}}
+		{{#addedNoSuccess}}<spam class="failure">&nbsp;&nbsp;No se ha podido añadir la bicicleta, el número de serie tiene que tener 16 caracteres</spam>{{/addedNoSuccess}}
+					
+	</body>
+	
+</html>
